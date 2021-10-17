@@ -12,13 +12,15 @@ export const getTasks = async (req, res) => {
     }
 };
 
-export const createTasks = (req, res) => {
+export const createTasks = async (req, res) => {
     const body = req.body;
-    const newtask = Task.New(body);
+    const newTask = Task.New(body);
     try {
-
+        //this is the asynchonous action
+        await newTask.save();
+        res.status(201).json(newTask);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(409).json({ message: error.message });
     }
     res.send('Create Task Works')
 };
