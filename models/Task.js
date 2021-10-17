@@ -12,5 +12,5 @@ const taskSchema = mongoose.Schema({
     },
 });
 
-const Task = mongoose.model('PostTask', taskSchema);
-export default Task;
+var PostMessage = mongoose.model('Task', taskSchema);
+export default PostMessage;
