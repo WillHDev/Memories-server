@@ -5,11 +5,14 @@ import mongoose from 'mongoose'
 const app = express()
 import postRoutes from './routes/posts.js'
 
-app.use('/posts', postRoutes);
+
 //Difference
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true }))
+//cors must be above
 app.use(cors())
+
+app.use('/tasks', postRoutes);
 //import bodyParser from 'body-parser'
 //app.use(bodyParser.json({ limit: "30mb", extended: true }));
 
