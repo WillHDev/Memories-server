@@ -12,15 +12,26 @@ export const getTasks = async (req, res) => {
     }
 };
 
-export const createTasks = async (req, res) => {
-    const body = req.body;
-    const newTask = Task.New(body);
+export const createTask = async (req, res) => {
+    const { title, description, assignedTo, tags, creator } = req.body;
+
+    const newTask = new Task({ title, description, assignedTo, tags, creator })
+
     try {
-        //this is the asynchonous action
         await newTask.save();
-        res.status(201).json(newTask);
+
+        res.status(201).json( newTask );
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
-    res.send('Create Task Works')
+    // const body = req.body;
+    // const newTask = Task.New(body);
+    // try {
+    //     //this is the asynchonous action
+    //     await newTask.save();
+    //     res.status(201).json(newTask);
+    // } catch (error) {
+    //     res.status(409).json({ message: error.message });
+    // }
+    // res.send('Create Task Works')
 };
