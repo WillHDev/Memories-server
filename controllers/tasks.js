@@ -1,4 +1,4 @@
- import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import Task from '../models/Task.js';
 
 export const getTasks = async (req, res) => {
@@ -38,14 +38,20 @@ export const createTask = async (req, res) => {
 };
 
 export const updateTask = async (req, res) => {
-const { id: _id } = req.params
-const task = req.body;
+    console.log('update endpoint hit')
+  
+    const { id } = req.params
+    console.log(id)
+
+    const { title, description, tags, assignedTo, creator } = req.body;
+//const task = req.body;
 
 if (!mongoose.types.ObjectId.isValid(_id)) {
     return res.status(404).send('No task with that id')
 }
 
 
- const updatedTask = await Task.findByIdAndUpdate(_id, task, { new: true } )
- res.json(updateTask)
+ const updatedTask = {creator, title, description, tags, assignedTo, _id: id }
+ await Task.findByIdAndUpdate( _id, updatedTask, { new: true } )
+ res.json(updatedTask)
 }

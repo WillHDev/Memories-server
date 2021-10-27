@@ -1,5 +1,5 @@
 import express from 'express';
-import { getTasks, createTask, updateTask } from '../controllers/posts.js';
+import { getTasks, createTask, updateTask } from '../controllers/tasks.js';
 //import Task from '../models/Task.js'
 
 const router = express.Router()
@@ -8,6 +8,6 @@ const router = express.Router()
 //endpoint
 router.get('/', getTasks);
 router.post('/', createTask);
-router.patch('/:id', updateTask);
+router.put('/:id', updateTask);
 
 export default router;
